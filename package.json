@@ -24,17 +24,17 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "package-explorer",
-					"title": "Package Explorer",
-					"icon": "media/dep.svg"
+					"id": "todolist-explorer",
+					"title": "TODO Explorer",
+					"icon": "media/todos.svg"
 				}
 			]
 		},
 		"views": {
-			"package-explorer": [
+			"todolist-explorer": [
 				{
-					"id": "nodeDependencies",
-					"name": "Node Dependencies"
+					"id": "todolist-view",
+					"name": "TODO List"
 				}
 			]
 		}
