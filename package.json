@@ -23,7 +23,11 @@
 			},
 			{
 				"command": "todoList.addTodo",
-				"title": "TODO List: Add New Todo"
+				"title": "TODO List: Add New Todo",
+				"icon": {
+					"light": "resources/light/plus.svg",
+					"dark": "resources/dark/plus.svg"
+				}
 			}
 		],
 		"viewsContainers": {
@@ -47,7 +51,7 @@
 			"view/title": [
 				{
 					"command": "todoList.addTodo",
-					"when": "view == todo"
+					"group": "navigation"
 				}
 			]
 		}
