@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 
-export class TodoItem extends vscode.TreeItem {
+export class TodoTreeItem extends vscode.TreeItem {
     constructor(
         public readonly label: string,
+        public readonly _description: string,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
         public readonly command?: vscode.Command
     ) {
@@ -15,7 +16,7 @@ export class TodoItem extends vscode.TreeItem {
     }
 
     get description(): string {
-        return this.label;
+        return this._description;
     }
 
     // iconPath = {
