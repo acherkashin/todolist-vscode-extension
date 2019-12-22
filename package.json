@@ -33,7 +33,7 @@
 		"views": {
 			"todolist-explorer": [
 				{
-					"id": "todolist-view",
+					"id": "todoListView",
 					"name": "TODO List"
 				}
 			]
