@@ -4,7 +4,7 @@ import * as path from 'path';
 export class TodoTreeItem extends vscode.TreeItem {
     constructor(
         public readonly label: string,
-        public readonly _description: string,
+        public readonly _description: string | undefined,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
         public readonly command?: vscode.Command
     ) {
@@ -15,7 +15,7 @@ export class TodoTreeItem extends vscode.TreeItem {
         return this.label;
     }
 
-    get description(): string {
+    get description() {
         return this._description;
     }
 

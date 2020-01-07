@@ -10,17 +10,12 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld",
 		"onCommand:todoList.addTodo",
 		"onView:todoListView"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
-			},
 			{
 				"command": "todoList.addTodo",
 				"title": "TODO List: Add New Todo",

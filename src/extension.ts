@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { TodoTreeNodeProvider } from './todoTree';
 import { TodoStore } from './todoStore';
+import { showCreateToDo } from './todoInputs';
 
 
 export function activate(context: vscode.ExtensionContext) {
@@ -15,16 +16,16 @@ export function activate(context: vscode.ExtensionContext) {
 	const todoTreeNodeProvider = new TodoTreeNodeProvider(todoStore);
 	vscode.window.registerTreeDataProvider('todoListView', todoTreeNodeProvider);
 
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		vscode.window.showInformationMessage('Hello World!');
-	});
+	context.subscriptions.push(
+		vscode.commands.registerCommand('todoList.addTodo', async () => {
+			const todo = await showCreateToDo();
 
-	vscode.commands.registerCommand('todoList.addTodo', () => {
-		todoStore.addTodo({ title: `TODO: ${todoStore.getAll().length + 1}`, description: "Added todo" });
-		todoTreeNodeProvider.refresh();
-	});
-
-	context.subscriptions.push(disposable);
+			if (todo) {
+				todoStore.addTodo(todo);
+				todoTreeNodeProvider.refresh();
+			}
+		})
+	);
 }
 
 // this method is called when your extension is deactivated

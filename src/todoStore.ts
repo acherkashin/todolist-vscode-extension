@@ -1,6 +1,6 @@
 export interface TodoItem {
     title: string;
-    description: string;
+    description?: string;
 }
 
 export class TodoStore {
