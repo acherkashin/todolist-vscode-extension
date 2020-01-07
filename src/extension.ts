@@ -11,7 +11,6 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Congratulations, your extension "todolist-vscode-extension" is now active!');
 
 	const todoStore = new TodoStore();
-	todoStore.addTodo({ title: "TODO1", description: "Description" });
 
 	const todoTreeNodeProvider = new TodoTreeNodeProvider(todoStore);
 	vscode.window.registerTreeDataProvider('todoListView', todoTreeNodeProvider);
@@ -24,6 +23,12 @@ export function activate(context: vscode.ExtensionContext) {
 				todoStore.addTodo(todo);
 				todoTreeNodeProvider.refresh();
 			}
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('todoList.undoCompletion', () => {
+			vscode.window.showInformationMessage("Undo Complete command is successfully called");
 		})
 	);
 }

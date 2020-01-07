@@ -7,7 +7,11 @@ export async function showCreateToDo(): Promise<TodoItem | null> {
     if (name) {
         const description = await showDescriptionBox();
 
-        return { title: name, description };
+        return {
+            title: name,
+            description,
+            isCompleted: false,
+        };
     }
 
     return null;

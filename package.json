@@ -18,10 +18,20 @@
 		"commands": [
 			{
 				"command": "todoList.addTodo",
-				"title": "TODO List: Add New Todo",
+				"category": "ToDo List",
+				"title": "Add New Todo",
 				"icon": {
 					"light": "resources/light/plus.svg",
 					"dark": "resources/dark/plus.svg"
+				}
+			},
+			{
+				"command": "todoList.complete",
+				"category": "ToDo List",
+				"title": "Complete ToDo",
+				"icon": {
+					"light": "resources/light/check.svg",
+					"dark": "resources/dark/check.svg"
 				}
 			}
 		],
@@ -48,6 +58,12 @@
 					"command": "todoList.addTodo",
 					"group": "navigation"
 				}
+			],
+			"view/item/context": [
+				{
+					"command": "todoList.undoCompletion",
+					"group": "inline"
+				}
 			]
 		}
 	},
@@ -68,5 +84,6 @@
 		"typescript": "^3.6.4",
 		"tslint": "^5.20.0",
 		"vscode-test": "^1.2.2"
-	}
+	},
+	"dependencies": {}
 }
