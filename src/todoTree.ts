@@ -36,7 +36,7 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 		return this.todoStore.todos.map((item) => {
 			const treeItem = new TodoTreeItem(item, vscode.TreeItemCollapsibleState.None);
 			observe(item, () => {
-				treeItem.refreshContextValue();
+				treeItem.update(item);
 				this.refresh(treeItem);
 			});
 

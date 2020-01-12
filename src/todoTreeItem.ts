@@ -3,21 +3,16 @@ import { ITodoItem } from './todoItem';
 
 export class TodoTreeItem extends vscode.TreeItem {
     constructor(
-        public readonly todoItem: ITodoItem,
+        todoItem: ITodoItem,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
         public readonly command?: vscode.Command
     ) {
         super(todoItem.title, collapsibleState);
-        this.id = todoItem.id;
-        this.refreshContextValue();
+        this.update(todoItem);
     }
 
     get tooltip(): string {
-        return this.todoItem.description || "";
-    }
-
-    get description() {
-        return this.todoItem.description;
+        return <string>this.description;
     }
 
     // iconPath = {
@@ -25,11 +20,14 @@ export class TodoTreeItem extends vscode.TreeItem {
     //     dark: path.join(__filename, '..', '..', 'resources', 'dark', 'dependency.svg')
     // };
 
-    refreshContextValue() {
-        if (this.todoItem.isCompleted) {
-            this.contextValue = "completedTodo";
-        } else {
-            this.contextValue = "uncompletedTodo";
-        }
+    update(todoItem: ITodoItem) {
+        this.id = todoItem.id;
+        this.description = todoItem.description;
+        this.label = todoItem.title;
+        this.contextValue = getContextValue(todoItem);
     }
+}
+
+function getContextValue(todoItem: ITodoItem) {
+    return todoItem.isCompleted ? "completedTodo" : "uncompletedTodo";
 }

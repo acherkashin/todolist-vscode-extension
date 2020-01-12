@@ -28,7 +28,7 @@
 			{
 				"command": "todoList.complete",
 				"category": "ToDo List",
-				"title": "Complete ToDo",
+				"title": "Complete",
 				"icon": {
 					"light": "resources/light/check.svg",
 					"dark": "resources/dark/check.svg"
@@ -37,11 +37,16 @@
 			{
 				"command": "todoList.reopen",
 				"category": "ToDo List",
-				"title": "Reopen ToDo",
+				"title": "Reopen",
 				"icon": {
 					"light": "resources/light/discard.svg",
 					"dark": "resources/light/discard.svg"
 				}
+			},
+			{
+				"command": "todoList.editTitle",
+				"category": "ToDo List",
+				"title": "Edit Title"
 			}
 		],
 		"viewsContainers": {
@@ -78,6 +83,10 @@
 					"command": "todoList.complete",
 					"group": "inline",
 					"when": "view == todoListView && viewItem == uncompletedTodo"
+				},
+				{
+					"command": "todoList.editTitle",
+					"when": "view == todoListView"
 				}
 			]
 		}

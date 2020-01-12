@@ -17,10 +17,17 @@ export class TodoStore {
         this.todos.push(item);
     }
 
+    getTodo(itemId: string) {
+        return this.todos.find((todo) => todo.id === itemId);
+    }
+
+    @action updateTitle(itemId: string, newTitle: string) {
+        const todo = this.getTodo(itemId);
+        todo && (todo.title = newTitle);
+    }
+
     @action private toggleCompletion(itemId: string, isCompleted: boolean) {
-        const todo = this.todos.find((todo) => todo.id === itemId);
-        if (todo) {
-            todo.isCompleted = isCompleted;
-        }
+        const todo = this.getTodo(itemId);
+        todo && (todo.isCompleted = isCompleted);
     }
 }
