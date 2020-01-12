@@ -47,6 +47,11 @@
 				"command": "todoList.editTitle",
 				"category": "ToDo List",
 				"title": "Edit Title"
+			},
+			{
+				"command": "todoList.editDescription",
+				"category": "ToDo List",
+				"title": "Edit Description"
 			}
 		],
 		"viewsContainers": {
@@ -86,6 +91,10 @@
 				},
 				{
 					"command": "todoList.editTitle",
+					"when": "view == todoListView"
+				},
+				{
+					"command": "todoList.editDescription",
 					"when": "view == todoListView"
 				}
 			]

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { TodoTreeNodeProvider } from './todoTree';
 import { TodoStore } from './todoStore';
-import { showCreateToDo, showNameBox } from './todoInputs';
+import { showCreateToDo, showNameBox, showDescriptionBox } from './todoInputs';
 import { TodoTreeItem } from './todoTreeItem';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -23,10 +23,16 @@ export function activate(context: vscode.ExtensionContext) {
 			todoStore.completeItem(<string>item.id);
 		}),
 		vscode.commands.registerCommand('todoList.editTitle', async (item: TodoTreeItem) => {
-			const todo = todoStore.getTodo(<string>item.id)
+			const todo = todoStore.getTodo(<string>item.id);
 			const newName = await showNameBox(todo?.title);
 
 			newName && todoStore.updateTitle(<string>item.id, newName);
+		}),
+		vscode.commands.registerCommand('todoList.editDescription', async (item: TodoTreeItem) => {
+			const todo = todoStore.getTodo(<string>item.id);
+			const newDescription = await showDescriptionBox(todo?.description);
+
+			(newDescription != null) && todoStore.updateDescription(<string>item.id, newDescription);
 		}),
 	);
 }

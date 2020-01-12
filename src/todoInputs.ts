@@ -31,10 +31,11 @@ export async function showNameBox(value?: string): Promise<string | undefined> {
     return name;
 }
 
-export async function showDescriptionBox(): Promise<string | undefined> {
+export async function showDescriptionBox(value?: string): Promise<string | undefined> {
     const description = await vscode.window.showInputBox({
         prompt: 'Input TODO description',
-        placeHolder: 'Description (Optional)'
+        placeHolder: 'Description (Optional)',
+        value,
     });
 
     return description;

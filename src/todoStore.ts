@@ -26,6 +26,11 @@ export class TodoStore {
         todo && (todo.title = newTitle);
     }
 
+    @action updateDescription(itemId: string, newDescription?: string) {
+        const todo = this.getTodo(itemId);
+        todo && (todo.description = newDescription);
+    }
+
     @action private toggleCompletion(itemId: string, isCompleted: boolean) {
         const todo = this.getTodo(itemId);
         todo && (todo.isCompleted = isCompleted);
