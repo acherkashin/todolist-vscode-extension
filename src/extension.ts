@@ -3,6 +3,7 @@ import { TodoTreeNodeProvider } from './todoTree';
 import { TodoStore } from './todoStore';
 import { showCreateToDo, showNameBox, showDescriptionBox } from './todoInputs';
 import { TodoTreeItem } from './todoTreeItem';
+import { createStatusBarItem } from './statusBarItem';
 
 export function activate(context: vscode.ExtensionContext) {
 	const todoStore = new TodoStore();
@@ -10,7 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
 	const todoTreeNodeProvider = new TodoTreeNodeProvider(todoStore);
 	vscode.window.registerTreeDataProvider('todoListView', todoTreeNodeProvider);
 
+	const statusBarItem = createStatusBarItem(todoStore);
+	
 	context.subscriptions.push(
+		statusBarItem,
 		vscode.commands.registerCommand('todoList.addTodo', async () => {
 			const todo = await showCreateToDo();
 
