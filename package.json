@@ -33,6 +33,15 @@
 					"light": "resources/light/check.svg",
 					"dark": "resources/dark/check.svg"
 				}
+			},
+			{
+				"command": "todoList.reopen",
+				"category": "ToDo List",
+				"title": "Reopen ToDo",
+				"icon": {
+					"light": "resources/light/discard.svg",
+					"dark": "resources/light/discard.svg"
+				}
 			}
 		],
 		"viewsContainers": {
@@ -61,7 +70,11 @@
 			],
 			"view/item/context": [
 				{
-					"command": "todoList.undoCompletion",
+					"command": "todoList.reopen",
+					"group": "inline"
+				},
+				{
+					"command": "todoList.complete",
 					"group": "inline"
 				}
 			]

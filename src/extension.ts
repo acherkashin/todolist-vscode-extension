@@ -27,8 +27,8 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('todoList.undoCompletion', () => {
-			vscode.window.showInformationMessage("Undo Complete command is successfully called");
+		vscode.commands.registerCommand('todoList.reopen', () => {
+			vscode.window.showInformationMessage("reopen command is successfully called");
 		})
 	);
 }
