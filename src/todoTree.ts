@@ -14,8 +14,8 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 		});
 	}
 
-	refresh(): void {
-		this._onDidChangeTreeData.fire();
+	refresh(item?: TodoTreeItem): void {
+		this._onDidChangeTreeData.fire(item);
 	}
 
 	getTreeItem(element: TodoTreeItem): TodoTreeItem {
@@ -32,9 +32,13 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 	}
 
 	private toTreeItems(): TodoTreeItem[] {
+		// https://github.com/mobxjs/mobx/issues/1167#issuecomment-330193263
 		return this.todoStore.todos.map((item) => {
 			const treeItem = new TodoTreeItem(item, vscode.TreeItemCollapsibleState.None);
-			observe(item, () => this.refresh());
+			observe(item, () => {
+				treeItem.refreshContextValue();
+				this.refresh(treeItem);
+			});
 
 			return treeItem;
 		});

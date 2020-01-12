@@ -9,7 +9,7 @@ export class TodoTreeItem extends vscode.TreeItem {
     ) {
         super(todoItem.title, collapsibleState);
         this.id = todoItem.id;
-        this.contextValue = this.getContextValue();
+        this.refreshContextValue();
     }
 
     get tooltip(): string {
@@ -25,11 +25,11 @@ export class TodoTreeItem extends vscode.TreeItem {
     //     dark: path.join(__filename, '..', '..', 'resources', 'dark', 'dependency.svg')
     // };
 
-    private getContextValue() {
+    refreshContextValue() {
         if (this.todoItem.isCompleted) {
-            return "completedTodo";
+            this.contextValue = "completedTodo";
+        } else {
+            this.contextValue = "uncompletedTodo";
         }
-
-        return "uncompletedTodo";
     }
 }
