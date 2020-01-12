@@ -1,13 +1,14 @@
 import * as vscode from 'vscode';
-import { TodoItem } from './todoItem';
+import { ITodoItem } from './todoItem';
 
 export class TodoTreeItem extends vscode.TreeItem {
     constructor(
-        public readonly todoItem: TodoItem,
+        public readonly todoItem: ITodoItem,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
         public readonly command?: vscode.Command
     ) {
         super(todoItem.title, collapsibleState);
+        this.id = todoItem.id;
         this.contextValue = this.getContextValue();
     }
 

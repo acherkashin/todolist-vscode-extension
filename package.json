@@ -101,6 +101,7 @@
 		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
+		"mobx": "^5.15.1",
 		"uuid": "^3.3.3"
 	}
 }

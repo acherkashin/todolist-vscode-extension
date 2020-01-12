@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { TodoTreeItem } from './todoTreeItem';
 import { TodoStore } from './todoStore';
-import { TodoItem } from './todoItem';
+import { observe } from 'mobx';
 
 export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeItem> {
 
@@ -9,10 +9,9 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 	readonly onDidChangeTreeData: vscode.Event<TodoTreeItem | undefined> = this._onDidChangeTreeData.event;
 
 	constructor(private todoStore: TodoStore) {
-	}
-
-	addTodo(todoData: { title: string }) {
-
+		observe(todoStore.todos, (change) => {
+			this.refresh();
+		});
 	}
 
 	refresh(): void {
@@ -27,13 +26,18 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 		if (element) {
 			return Promise.resolve([]);
 		} else {
-			const items = this.toTreeItems(this.todoStore.getAll());
+			const items = this.toTreeItems();
 			return Promise.resolve(items);
 		}
 	}
 
-	private toTreeItems(items: TodoItem[]): TodoTreeItem[] {
-		return items.map((item) => new TodoTreeItem(item, vscode.TreeItemCollapsibleState.None));
+	private toTreeItems(): TodoTreeItem[] {
+		return this.todoStore.todos.map((item) => {
+			const treeItem = new TodoTreeItem(item, vscode.TreeItemCollapsibleState.None);
+			observe(item, () => this.refresh());
+
+			return treeItem;
+		});
 	}
 }
 

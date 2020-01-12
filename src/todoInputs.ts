@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { TodoItem, createTodoItem } from './todoItem';
+import { ITodoItem, createTodoItem } from './todoItem';
 
-export async function showCreateToDo(): Promise<TodoItem | null> {
+export async function showCreateToDo(): Promise<ITodoItem | null> {
     const name = await showInputBox();
 
     if (name) {
