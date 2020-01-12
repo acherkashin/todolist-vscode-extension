@@ -1,11 +1,11 @@
-export interface TodoItem {
-    title: string;
-    description?: string;
-    isCompleted: boolean;
-}
+import { TodoItem } from "./todoItem";
 
 export class TodoStore {
     private todos: TodoItem[] = [];
+
+    completeItem(itemId: string) {
+
+    }
 
     addTodo(item: TodoItem) {
         this.todos.push(item);

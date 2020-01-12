@@ -1,21 +1,22 @@
 import * as vscode from 'vscode';
+import { TodoItem } from './todoItem';
 
 export class TodoTreeItem extends vscode.TreeItem {
     constructor(
-        public readonly label: string,
-        public readonly _description: string | undefined,
+        public readonly todoItem: TodoItem,
         public readonly collapsibleState: vscode.TreeItemCollapsibleState,
         public readonly command?: vscode.Command
     ) {
-        super(label, collapsibleState);
+        super(todoItem.title, collapsibleState);
+        this.contextValue = this.getContextValue();
     }
 
     get tooltip(): string {
-        return this.label;
+        return this.todoItem.description || "";
     }
 
     get description() {
-        return this._description;
+        return this.todoItem.description;
     }
 
     // iconPath = {
@@ -23,6 +24,11 @@ export class TodoTreeItem extends vscode.TreeItem {
     //     dark: path.join(__filename, '..', '..', 'resources', 'dark', 'dependency.svg')
     // };
 
-    contextValue = 'todo';
+    private getContextValue() {
+        if (this.todoItem.isCompleted) {
+            return "completedTodo";
+        }
 
+        return "uncompletedTodo";
+    }
 }

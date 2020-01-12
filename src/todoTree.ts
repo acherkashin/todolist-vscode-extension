@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { TodoTreeItem } from './todoTreeItem';
-import { TodoStore, TodoItem } from './todoStore';
+import { TodoStore } from './todoStore';
+import { TodoItem } from './todoItem';
 
 export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeItem> {
 
@@ -18,7 +19,7 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 		this._onDidChangeTreeData.fire();
 	}
 
-	getTreeItem(element: TodoTreeItem): vscode.TreeItem {
+	getTreeItem(element: TodoTreeItem): TodoTreeItem {
 		return element;
 	}
 
@@ -31,8 +32,8 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TodoTreeIte
 		}
 	}
 
-	private toTreeItems(items: TodoItem[]) {
-		return items.map((item) => new TodoTreeItem(item.title, item.description, vscode.TreeItemCollapsibleState.None));
+	private toTreeItems(items: TodoItem[]): TodoTreeItem[] {
+		return items.map((item) => new TodoTreeItem(item, vscode.TreeItemCollapsibleState.None));
 	}
 }
 

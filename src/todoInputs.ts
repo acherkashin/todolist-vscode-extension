@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { TodoItem } from './todoStore';
+import { TodoItem, createTodoItem } from './todoItem';
 
 export async function showCreateToDo(): Promise<TodoItem | null> {
     const name = await showInputBox();
@@ -7,11 +7,12 @@ export async function showCreateToDo(): Promise<TodoItem | null> {
     if (name) {
         const description = await showDescriptionBox();
 
-        return {
+
+        return createTodoItem({
             title: name,
             description,
             isCompleted: false,
-        };
+        });
     }
 
     return null;
