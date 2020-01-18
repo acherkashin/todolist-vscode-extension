@@ -1,19 +1,19 @@
 import * as vscode from 'vscode';
 import { TodoStore } from './todoStore';
-import { observe } from 'mobx';
+import { autorun } from 'mobx';
+import { ITodoItem } from './todoItem';
 
 export function createStatusBarItem(store: TodoStore): vscode.StatusBarItem {
     const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1000);
-    update(item, store);
 
-    observe(store.todos, () => update(item, store));
+    autorun(() => update(item, store.openedTodos));
 
     return item;
 }
 
-function update(item: vscode.StatusBarItem, store: TodoStore) {
-    if (store.todos?.length) {
-        item.text = `$(checklist) ${store.todos.length} TODO`;
+function update(item: vscode.StatusBarItem, items: ITodoItem[]) {
+    if (items?.length) {
+        item.text = `$(checklist) ${items.length} TODO`;
         item.show();
     } else {
         item.hide();
