@@ -38,6 +38,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 			(newDescription != null) && todoStore.updateDescription(<string>item.id, newDescription);
 		}),
+		vscode.commands.registerCommand('todoList.delete', (item: TodoTreeItem) => {
+			todoStore.deleteTodo(<string>item.id);
+		}),
 	);
 }
 

@@ -26,6 +26,11 @@
 				}
 			},
 			{
+				"command": "todoList.delete",
+				"category": "ToDo List",
+				"title": "Delete"
+			},
+			{
 				"command": "todoList.complete",
 				"category": "ToDo List",
 				"title": "Complete",
@@ -95,6 +100,10 @@
 				},
 				{
 					"command": "todoList.editDescription",
+					"when": "view == todoListView"
+				},
+				{
+					"command": "todoList.delete",
 					"when": "view == todoListView"
 				}
 			]

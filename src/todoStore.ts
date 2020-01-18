@@ -33,6 +33,11 @@ export class TodoStore {
         this.todos.push(item);
     }
 
+    @action deleteTodo(id: string) {
+        const itemIndex = this.todos.findIndex((item) => item.id === id);
+        this.todos.splice(itemIndex, 1);
+    }
+
     getTodo(itemId: string) {
         return this.todos.find((todo) => todo.id === itemId);
     }
