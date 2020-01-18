@@ -6,13 +6,13 @@ import { TodoTreeItem } from './todoTreeItem';
 import { createStatusBarItem } from './statusBarItem';
 
 export function activate(context: vscode.ExtensionContext) {
-	const todoStore = new TodoStore();
+	const todoStore = new TodoStore(context);
 
 	const todoTreeNodeProvider = new TodoTreeNodeProvider(todoStore);
 	vscode.window.registerTreeDataProvider('todoListView', todoTreeNodeProvider);
 
 	const statusBarItem = createStatusBarItem(todoStore);
-	
+
 	context.subscriptions.push(
 		statusBarItem,
 		vscode.commands.registerCommand('todoList.addTodo', async () => {

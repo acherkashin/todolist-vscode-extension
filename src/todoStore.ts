@@ -1,9 +1,17 @@
+import * as vscode from 'vscode';
 import { ITodoItem } from "./todoItem";
-import { observable, action, computed } from "mobx";
-
+import { observable, action, computed, observe } from "mobx";
 
 export class TodoStore {
     @observable todos: ITodoItem[] = [];
+
+    constructor(context: vscode.ExtensionContext) {
+        const todos = context.workspaceState.get<ITodoItem[]>('todos', []);
+
+        this.todos = todos;
+
+        observe(this.todos, () => context.workspaceState.update('todos', this.todos));
+    }
 
     @computed get completedTodos(): ITodoItem[] {
         return this.todos.filter((item) => item.isCompleted);
