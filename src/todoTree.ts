@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
 import { TodoTreeItem, TodoTreeItemCategory } from './todoTreeItem';
 import { TodoStore } from './todoStore';
-import { observe } from 'mobx';
+import { observe, Lambda } from 'mobx';
 import { ITodoItem } from './todoItem';
 
 type TreeNode = TodoTreeItem | TodoTreeItemCategory;
 
 export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TreeNode> {
-
+	private disposers: Lambda[] = [];
 	private _onDidChangeTreeData: vscode.EventEmitter<TreeNode | undefined> = new vscode.EventEmitter<TreeNode | undefined>();
 	readonly onDidChangeTreeData: vscode.Event<TreeNode | undefined> = this._onDidChangeTreeData.event;
 
@@ -18,10 +18,15 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TreeNode> {
 	}
 
 	refresh(item?: TodoTreeItem): void {
+
 		this._onDidChangeTreeData.fire(item);
 	}
 
 	getTreeItem(element: TodoTreeItem): TodoTreeItem {
+		if (!element) {
+			this.cleanDisposer();
+		}
+
 		return element;
 	}
 
@@ -56,7 +61,7 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TreeNode> {
 		// TODO: https://github.com/mobxjs/mobx/issues/1167#issuecomment-330193263
 		return items.map((item) => {
 			const treeItem = new TodoTreeItem(item, vscode.TreeItemCollapsibleState.None);
-			observe(item, (change) => {
+			this.disposers.push(observe(item, (change) => {
 				if (change.name === "isCompleted") {
 					this.refresh();
 					return;
@@ -64,10 +69,15 @@ export class TodoTreeNodeProvider implements vscode.TreeDataProvider<TreeNode> {
 
 				treeItem.update(item);
 				this.refresh(treeItem);
-			});
+			}));
 
 			return treeItem;
 		});
+	}
+
+	private cleanDisposer() {
+		this.disposers.forEach((dispose) => dispose());
+		this.disposers = [];
 	}
 }
 
