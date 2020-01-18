@@ -31,3 +31,13 @@ export class TodoTreeItem extends vscode.TreeItem {
 function getContextValue(todoItem: ITodoItem) {
     return todoItem.isCompleted ? "completedTodo" : "uncompletedTodo";
 }
+
+export class TodoTreeItemCategory extends vscode.TreeItem {
+    constructor(
+        readonly categoryName: string,
+        public readonly collapsibleState?: vscode.TreeItemCollapsibleState,
+        public readonly command?: vscode.Command
+    ) {
+        super(categoryName)
+    }
+}

@@ -1,9 +1,17 @@
 import { ITodoItem } from "./todoItem";
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 
 
 export class TodoStore {
     @observable todos: ITodoItem[] = [];
+
+    @computed get completedTodos(): ITodoItem[] {
+        return this.todos.filter((item) => item.isCompleted);
+    }
+
+    @computed get openedTodos(): ITodoItem[] {
+        return this.todos.filter((item) => !item.isCompleted);
+    }
 
     completeItem(itemId: string) {
         this.toggleCompletion(itemId, true);
