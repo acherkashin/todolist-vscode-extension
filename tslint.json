@@ -1,22 +1,16 @@
 {
-	"rules": {
-		"no-string-throw": true,
-		"no-unused-expression": false,
-		"no-duplicate-variable": true,
-		"curly": true,
-		"class-name": true,
-		"semicolon": [
-			true,
-			"always"
-		],
-		"no-default-export": true,
-		"interface-name": true,
-		"triple-equals": {
-            "options": [
-                "allow-null-check",
-                "allow-undefined-check"
-            ]
-		}
-	},
-	"defaultSeverity": "warning"
+  "rules": {
+    "no-string-throw": true,
+    "no-unused-expression": false,
+    "no-duplicate-variable": true,
+    "curly": true,
+    "class-name": true,
+    "semicolon": [true, "always"],
+    "no-default-export": true,
+    "interface-name": true,
+    "triple-equals": {
+      "options": ["allow-null-check", "allow-undefined-check"]
+    }
+  },
+  "defaultSeverity": "warning"
 }

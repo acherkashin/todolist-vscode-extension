@@ -57,6 +57,11 @@
 				"command": "todoList.editDescription",
 				"category": "ToDo List",
 				"title": "Edit Description"
+			},
+			{
+				"command": "todoList.useAsCommitMessage",
+				"category": "ToDo List",
+				"title": "Use ToDo as a commit message"
 			}
 		],
 		"viewsContainers": {
